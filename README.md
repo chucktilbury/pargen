@@ -1,5 +1,9 @@
 # Pargen
-Very simple parser generator.
+Very simple parser generator. 
+
+## Status
+
+Work in progress. Actively working on it. 
 
 ## Why?
 
