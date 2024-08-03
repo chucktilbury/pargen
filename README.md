@@ -86,3 +86,13 @@ group
 ```
 
 In the language, the ``*`` means "zero or more", ``+`` means "one or more", and ``?`` means "zero or one". Any combination of TERMINALs and NON_TERMINALs can make up a production.
+
+### Build
+
+To build the parser generator simply type ``make``. 
+#### Dependencies
+
+* GNU make
+* clang
+* Bison
+* Flex
