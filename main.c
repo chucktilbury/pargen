@@ -14,6 +14,18 @@ extern int yydebug;
 StrLst* terms  = NULL;
 StrLst* nterms = NULL;
 
+void dump_str_lst(StrLst* lst, const char* str) {
+
+    int post = 0;
+    String* ptr;
+
+    printf("%s\n", str);
+    post = 0;
+
+    while(NULL != (ptr = iterate_str_lst(lst, &post)))
+        printf("%3d. %s\n", post, raw_string(ptr));
+}
+
 int main(void) {
 
     terms  = create_str_lst();
@@ -24,21 +36,11 @@ int main(void) {
     open_file("simple-grammar.txt");
     yyparse();
 
-
-    int post;
-    String* str;
-    printf("\nTERMINALS\n");
-    post = 0;
-    sort_str_lst(terms);
-    while(NULL != (str = iterate_str_lst(terms, &post)))
-        printf("%3d. %s\n", post, raw_string(str));
-
-    printf("\nNON TERMINALS\n");
-    post = 0;
     sort_str_lst(nterms);
-    while(NULL != (str = iterate_str_lst(nterms, &post)))
-        printf("%3d. %s\n", post, raw_string(str));
+    sort_str_lst(terms);
 
+    // dump_str_lst(terms, "\nTERMINALS");
+    // dump_str_lst(nterms, "\nNON TERMINALS");
 
     traverse_ast(NULL, NULL);
 
