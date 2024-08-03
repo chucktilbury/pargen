@@ -153,13 +153,13 @@ String* convert_token(const char* str) {
         return TERMINAL;
     }
 
-\'([^\']*)\' {
+\'([^\'\n]*)\' {
         // These are "syntax" and direct the function of the AST
         yylval.str = convert_token(yytext);
         return TERMINAL;
     }
 
-\"([^\"])*\" {
+\"([^\"\n])*\" {
         // These are "syntax" and direct the function of the AST
         yylval.str = convert_token(yytext);
         return TERMINAL;

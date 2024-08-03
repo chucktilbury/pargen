@@ -1,5 +1,9 @@
 # Prerequisites
 *.d
+parse.c
+parse.h
+parse.output
+scan.c
 
 # Object files
 *.o
