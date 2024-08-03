@@ -7,7 +7,7 @@ I built this because I don't like PEG parsers and LALR parsers are not flexible 
 
 ## How?
 
-This parser generator creates a simple recursive decent parser with a separate scanner. The scanner is normally implemented using GNU Flex. The input language is very simple that supports a simplified regular expression syntax to allow for looping constructs to create lists. There is no particular attention payed to any particular scholarly work.
+This parser generator creates a simple recursive decent parser with a separate scanner. The scanner is normally implemented using GNU Flex. The input language is very simple that supports a simplified regular expression syntax to allow for looping constructs to create lists. There is no specific attention payed to any particular scholarly work. This is a result of many years of playing with parsers and parser generators as a hobby.
 
 The input language for the parser generator is regular and so the parser is implemented in GNU Bison. The scanner is implemented using GNU Flex. There is quite a bit of auxiliary code to handle things like strings and lists. No complicated symbol tables or code analysis is used. Simplicity is paramount. 
 
