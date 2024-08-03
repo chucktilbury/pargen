@@ -3,7 +3,7 @@ Very simple parser generator.
 
 ## Why?
 
-I built this because I don't like PEG parsers and LALR parsers are not flexible enough. I don't like PEG because it attempts to combine the scanner and the parser into a single input file, which clouds the actual grammar that is being developed. LALR parsers cannot parse syntax that is irregular, but there are many perfectly reasonable language constructs that are irregular. 
+I built this because I don't like PEG parsers and LALR parsers are not flexible enough. I don't like PEG because it attempts to combine the scanner and the parser into a single input file, which clouds the actual grammar that is being developed. LALR parsers cannot (easily) parse syntax that is irregular, but there are many perfectly reasonable language constructs that are irregular. 
 
 ## How?
 
