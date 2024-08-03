@@ -34,4 +34,4 @@ void clear_buffer(Buffer* buf);
 void* raw_buffer(Buffer* buf);
 size_t len_buffer(Buffer* buf);
 
-#endif  /* _BUFFER_H_ */
+#endif /* _BUFFER_H_ */

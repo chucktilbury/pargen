@@ -8,22 +8,25 @@
 #include "memory.h"
 
 #ifdef USE_AST_TRACE
-#   define AST_TRACE(fmt, ...) do { \
-            printf((fmt), ## __VA_ARGS__); \
-            fputc('\n', stdout); \
-        } while(0)
+#define AST_TRACE(fmt, ...)           \
+    do {                              \
+        printf((fmt), ##__VA_ARGS__); \
+        fputc('\n', stdout);          \
+    } while(0)
 #else
-#   define AST_TRACE(fmt, ...)
+#define AST_TRACE(fmt, ...)
 #endif
 
-#define CALL_PRE(n) do {                                                       \
-        if((pre) != NULL)                                                      \
-            (*pre)((AstNode*)n);                                               \
+#define CALL_PRE(n)              \
+    do {                         \
+        if((pre) != NULL)        \
+            (*pre)((AstNode*)n); \
     } while(0)
 
-#define CALL_POST(n) do {                                                      \
-        if((post) != NULL)                                                     \
-            (*post)((AstNode*)n);                                              \
+#define CALL_POST(n)              \
+    do {                          \
+        if((post) != NULL)        \
+            (*post)((AstNode*)n); \
     } while(0)
 
 #define NODE_TYPE(n) (((AstNode*)(n))->type)
@@ -32,37 +35,39 @@ extern AstNode* root_node;
 
 static inline const char* ast_node_type_to_str(AstNodeType type) {
 
-    return (type == AST_TERMINAL)? "AST_TERMINAL":
-        (type == AST_NTERM_REFERENCE)? "AST_NTERM_REFERENCE":
-        (type == AST_ZERO_OR_ONE)? "AST_ZERO_OR_ONE":
-        (type == AST_ONE_OR_MORE)? "AST_ONE_OR_MORE":
-        (type == AST_ZERO_OR_MORE)? "AST_ZERO_OR_MORE":
-        (type == AST_GROUP)? "AST_GROUP":
-        (type == AST_GRAMMAR)? "AST_GRAMMAR":
-        (type == AST_RULE)? "AST_RULE":
-        (type == AST_PRODUCTION_LIST)? "AST_PRODUCTION_LIST":
-        (type == AST_PRODUCTION)? "AST_PRODUCTION":
-        (type == AST_PROD_ELEM)? "AST_PROD_ELEM": "UNKNOWN AST TYPE";
+    return (type == AST_TERMINAL)         ? "AST_TERMINAL" :
+            (type == AST_NTERM_REFERENCE) ? "AST_NTERM_REFERENCE" :
+            (type == AST_ZERO_OR_ONE)     ? "AST_ZERO_OR_ONE" :
+            (type == AST_ONE_OR_MORE)     ? "AST_ONE_OR_MORE" :
+            (type == AST_ZERO_OR_MORE)    ? "AST_ZERO_OR_MORE" :
+            (type == AST_GROUP)           ? "AST_GROUP" :
+            (type == AST_GRAMMAR)         ? "AST_GRAMMAR" :
+            (type == AST_RULE)            ? "AST_RULE" :
+            (type == AST_PRODUCTION_LIST) ? "AST_PRODUCTION_LIST" :
+            (type == AST_PRODUCTION)      ? "AST_PRODUCTION" :
+            (type == AST_PROD_ELEM)       ? "AST_PROD_ELEM" :
+                                            "UNKNOWN AST TYPE";
 }
 
 static inline size_t get_struct_size(AstNodeType type) {
 
-    return (type == AST_TERMINAL)? sizeof(struct _ast_terminal_):
-        (type == AST_GRAMMAR)? sizeof(struct _ast_grammar_):
-        (type == AST_RULE)? sizeof(struct _ast_rule_):
-        (type == AST_PRODUCTION_LIST)? sizeof(struct _ast_production_list_):
-        (type == AST_PRODUCTION)? sizeof(struct _ast_production_):
-        (type == AST_PROD_ELEM)? sizeof(struct _ast_prod_elem_):
-        (type == AST_ZERO_OR_ONE)? sizeof(struct _ast_zero_or_one_):
-        (type == AST_ONE_OR_MORE)? sizeof(struct _ast_one_or_more_):
-        (type == AST_ZERO_OR_MORE)? sizeof(struct _ast_zero_or_more_):
-        (type == AST_GROUP)? sizeof(struct _ast_group_): sizeof(struct _ast_node_);
+    return (type == AST_TERMINAL)         ? sizeof(struct _ast_terminal_) :
+            (type == AST_GRAMMAR)         ? sizeof(struct _ast_grammar_) :
+            (type == AST_RULE)            ? sizeof(struct _ast_rule_) :
+            (type == AST_PRODUCTION_LIST) ? sizeof(struct _ast_production_list_) :
+            (type == AST_PRODUCTION)      ? sizeof(struct _ast_production_) :
+            (type == AST_PROD_ELEM)       ? sizeof(struct _ast_prod_elem_) :
+            (type == AST_ZERO_OR_ONE)     ? sizeof(struct _ast_zero_or_one_) :
+            (type == AST_ONE_OR_MORE)     ? sizeof(struct _ast_one_or_more_) :
+            (type == AST_ZERO_OR_MORE)    ? sizeof(struct _ast_zero_or_more_) :
+            (type == AST_GROUP)           ? sizeof(struct _ast_group_) :
+                                            sizeof(struct _ast_node_);
 }
 
 AstNode* create_ast_node(AstNodeType type) {
 
     AstNode* ptr = (AstNode*)_ALLOC(get_struct_size(type));
-    ptr->type = type;
+    ptr->type    = type;
 
     return ptr;
 }
@@ -158,8 +163,8 @@ void ast_prod_elem(ast_prod_elem_t* node, AstPassFunc pre, AstPassFunc post) {
             ast_group((ast_group_t*)node->node, pre, post);
             break;
         default:
-            fprintf(stderr, "FATAL: invalid state in %s: %d\n",
-                    __func__, node->type.type);
+            fprintf(stderr, "FATAL: invalid state in %s: %d\n", __func__,
+                    node->type.type);
             abort();
     }
 

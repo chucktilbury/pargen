@@ -115,8 +115,8 @@ prod_elem
             node->tok = $1;
             ((ast_prod_elem_t*)$$)->node = (AstNode*)node;
 
-            if(search_str_lst(terms, &str[1]) == -1)
-                append_str_lst(terms, create_string(&str[1]));
+            if(search_str_lst(terms, str) == -1)
+                append_str_lst(terms, create_string(str));
 
         }
     | NON_TERMINAL {

@@ -45,7 +45,7 @@ A rule starts with a non-terminal symbol that must have a lower case character b
 
 ##### terminal symbol expression
 
-Terminal symbols can be defined as quoted strings or as a symbol that starts with a capital letter. 
+Terminal symbols can be defined as quoted strings or as a symbol that starts with a capital letter. In general, terminals that need to be preserved in the AST, such as operators, should be defined as an upper case word and terminals that can be discarded in the AST, such as keywords, should be defined as quoted strings.
 
 ```
 [A-Z][a-zA-Z_0-9]*

@@ -24,7 +24,7 @@ WARNS	=	-Wno-parentheses-equality \
 			-Wno-sign-compare \
 			-Wno-implicit-function-declaration
 WARNS1	=	-Wno-gnu-zero-variadic-macro-arguments
-CONFIG	=	-DUSE_AST_TRACE #-DUSE_PARSE_TRACE
+CONFIG	=	#-DUSE_AST_TRACE #-DUSE_PARSE_TRACE
 CARGS	=	-Wall -Wextra -Wpedantic -std=c2x \
 			$(DEBUG) \
 			$(CONFIG) \

@@ -4,8 +4,8 @@
 #ifndef _AST_H_
 #define _AST_H_
 
-#include "str.h"
 #include "ptr_lst.h"
+#include "str.h"
 
 typedef enum {
     // defined by the grammar grammar
@@ -108,4 +108,4 @@ void ast_one_or_more(ast_one_or_more_t* node, AstPassFunc pre, AstPassFunc post)
 void ast_zero_or_more(ast_zero_or_more_t* node, AstPassFunc pre, AstPassFunc post);
 void ast_group(ast_group_t* node, AstPassFunc pre, AstPassFunc post);
 
-#endif
+#endif  /* _AST_H_ */

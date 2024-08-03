@@ -154,6 +154,28 @@ int search_str_lst(StrLst* lst, const char* str) {
 }
 
 /**
+ * @brief Do a bubble sort on a list of strings.
+ *
+ * @param lst
+ */
+void sort_str_lst(StrLst* lst) {
+
+    int flag = 1;
+
+    while(flag > 0) {
+        flag = 0;
+        for(size_t i = 0; i < lst->len - 1; i++) {
+            if(comp_string_string(lst->list[i], lst->list[i + 1]) > 0) {
+                String* tmp      = lst->list[i];
+                lst->list[i]     = lst->list[i + 1];
+                lst->list[i + 1] = tmp;
+                flag++;
+            }
+        }
+    }
+}
+
+/**
  * @brief Split the string into an array of char* where the character is
  * locatied.
  *
