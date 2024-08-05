@@ -44,4 +44,4 @@
 
 #endif
 
-#endif /* _MYASSERT_H_ */
+#endif  /* _MYASSERT_H_ */

@@ -2,7 +2,7 @@
  * @file cmdline.c
  *
  * @brief Use the GNU command line parser getopt_long() to parse a command
- * line with a fre enhansements.
+ * line with a fre enhancements.
  *
  * @author Chuck Tilbury (chucktilbury@gmail.com)
  * @version 0.0
@@ -134,7 +134,7 @@ void init_cmdline(const char* intro, const char* outtro, const char* name, const
 }
 
 /**
- * @brief Free all memeory associated with the data structure.
+ * @brief Free all memory associated with the data structure.
  *
  */
 void uninit_cmdline(void) {
