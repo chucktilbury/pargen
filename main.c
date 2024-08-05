@@ -26,6 +26,7 @@ void dump_str_lst(StrLst* lst, const char* str) {
         printf("%3d. %s\n", post, raw_string(ptr));
 }
 
+#include "regurg.h"
 int main(void) {
 
     terms  = create_str_lst();
@@ -42,7 +43,8 @@ int main(void) {
     // dump_str_lst(terms, "\nTERMINALS");
     // dump_str_lst(nterms, "\nNON TERMINALS");
 
-    traverse_ast(NULL, NULL);
+    //traverse_ast(NULL, NULL);
+    regurg();
 
     return 0;
 }
