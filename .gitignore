@@ -4,6 +4,7 @@ parse.c
 parse.h
 parse.output
 scan.c
+pargen
 
 # Object files
 *.o
