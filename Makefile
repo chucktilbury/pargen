@@ -14,20 +14,16 @@ OBJS	=	scan.o \
 			cmdline.o \
 			cmderrors.o \
 			cmdparse.o \
+			database.o \
 			main.o
 INCDIRS	=	-I.
 LIBDIRS =	-L.
 LIBS	=
 
-CC		= clang
+CC		= 	clang
+RM		=	rm -rf
 
 DEBUG	=	-g
-# Disable specific warnings that we don't have control over
-WARNS	=	-Wno-parentheses-equality \
-			-Wno-unused-variable \
-			-Wno-sign-compare \
-			-Wno-implicit-function-declaration \
-			-Wno-gnu-zero-variadic-macro-arguments
 CONFIG	=	#-DUSE_AST_TRACE -DUSE_PARSE_TRACE
 CARGS	=	-Wall -Wextra -Wpedantic -std=c2x \
 			$(DEBUG) \
@@ -46,10 +42,15 @@ parse.c parse.h: parse.y
 	bison -r all -do parse.c parse.y
 
 scan.o: scan.c scan.h
-	$(CC) $(CARGS) $(WARNS) -c -o scan.o scan.c
+	$(CC) $(CARGS) -Wno-parentheses-equality \
+			-Wno-unused-variable \
+			-Wno-sign-compare \
+			-Wno-implicit-function-declaration \
+			-Wno-gnu-zero-variadic-macro-arguments -c -o scan.o scan.c
 
 parse.o: parse.c parse.h
-	$(CC) $(CARGS) -Wno-gnu-zero-variadic-macro-arguments -c -o parse.o parse.c
+	$(CC) $(CARGS) -Wno-gnu-zero-variadic-macro-arguments \
+			-Wno-constant-logical-operand -c -o parse.o parse.c
 
 memory.o: memory.c memory.h
 	$(CC) $(CARGS) -c -o memory.o memory.c
@@ -87,8 +88,11 @@ cmdparse.o: cmdparse.c cmdparse.h
 regurg.o: regurg.c regurg.h
 	$(CC) $(CARGS) -c -o regurg.o regurg.c
 
+database.o: database.c database.h
+	$(CC) $(CARGS) -c -o database.o database.c
+
 clean:
-	$(RM) $(TARGET) $(OBJS) parse.c parse.h parse.output scan.c
+	-$(RM) $(TARGET) $(OBJS) parse.c parse.h parse.output scan.c
 
 remk: clean all
 

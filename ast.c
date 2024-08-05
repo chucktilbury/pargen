@@ -32,6 +32,7 @@
 #define NODE_TYPE(n) (((AstNode*)(n))->type)
 
 extern AstNode* root_node;
+int state_count = 0;
 
 #ifdef USE_AST_TRACE
 static inline const char* ast_node_type_to_str(AstNodeType type) {
@@ -78,16 +79,22 @@ AstNode* create_ast_node(AstNodeType type) {
 void ast_terminal(ast_terminal_t* node, AstPassFunc pre, AstPassFunc post) {
 
     CALL_PRE(node);
+
     AST_TRACE("%s", ast_node_type_to_str(node->type.type));
     AST_TRACE("> %s", raw_string(node->tok));
+    state_count++;
+
     CALL_POST(node);
 }
 
 void ast_nterm_reference(ast_nterm_reference_t* node, AstPassFunc pre, AstPassFunc post) {
 
     CALL_PRE(node);
+
     AST_TRACE("%s", ast_node_type_to_str(node->type.type));
     AST_TRACE("> %s", raw_string(node->tok));
+    state_count++;
+
     CALL_POST(node);
 }
 
@@ -100,6 +107,7 @@ void ast_grammar(ast_grammar_t* node, AstPassFunc pre, AstPassFunc post) {
     struct _ast_rule_* rule;
     while(NULL != (rule = iterate_ptr_lst(node->list, &mark)))
         ast_rule(rule, pre, post);
+    state_count++;
 
     CALL_POST(node);
 }
@@ -111,6 +119,7 @@ void ast_rule(ast_rule_t* node, AstPassFunc pre, AstPassFunc post) {
     AST_TRACE("%s", ast_node_type_to_str(node->type.type));
     AST_TRACE("> name: %s", raw_string(node->name));
     ast_production_list(node->list, pre, post);
+    state_count++;
 
     CALL_POST(node);
 }
@@ -124,6 +133,7 @@ void ast_production_list(ast_production_list_t* node, AstPassFunc pre, AstPassFu
     struct _ast_production_* prod;
     while(NULL != (prod = iterate_ptr_lst(node->list, &mark)))
         ast_production(prod, pre, post);
+    state_count++;
 
     CALL_POST(node);
 }
@@ -137,6 +147,7 @@ void ast_production(ast_production_t* node, AstPassFunc pre, AstPassFunc post) {
     struct _ast_prod_elem_* elem;
     while(NULL != (elem = iterate_ptr_lst(node->list, &mark)))
         ast_prod_elem(elem, pre, post);
+    state_count++;
 
     CALL_POST(node);
 }
@@ -170,6 +181,7 @@ void ast_prod_elem(ast_prod_elem_t* node, AstPassFunc pre, AstPassFunc post) {
                     node->type.type);
             abort();
     }
+    state_count++;
 
     CALL_POST(node);
 }
@@ -180,6 +192,7 @@ void ast_zero_or_one(ast_zero_or_one_t* node, AstPassFunc pre, AstPassFunc post)
 
     AST_TRACE("%s", ast_node_type_to_str(node->type.type));
     ast_group(node->group, pre, post);
+    state_count++;
 
     CALL_POST(node);
 }
@@ -190,6 +203,7 @@ void ast_one_or_more(ast_one_or_more_t* node, AstPassFunc pre, AstPassFunc post)
 
     AST_TRACE("%s", ast_node_type_to_str(node->type.type));
     ast_group(node->group, pre, post);
+    state_count++;
 
     CALL_POST(node);
 }
@@ -200,6 +214,7 @@ void ast_zero_or_more(ast_zero_or_more_t* node, AstPassFunc pre, AstPassFunc pos
 
     AST_TRACE("%s", ast_node_type_to_str(node->type.type));
     ast_group(node->group, pre, post);
+    state_count++;
 
     CALL_POST(node);
 }
@@ -210,6 +225,7 @@ void ast_group(ast_group_t* node, AstPassFunc pre, AstPassFunc post) {
 
     AST_TRACE("%s", ast_node_type_to_str(node->type.type));
     ast_production(node->prod, pre, post);
+    state_count++;
 
     CALL_POST(node);
 }
@@ -223,4 +239,6 @@ void traverse_ast(AstPassFunc pre, AstPassFunc post) {
         fprintf(stderr, "FATAL: root node is NULL");
         abort();
     }
+
+    printf("state count: %d\n", state_count);
 }
