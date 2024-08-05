@@ -33,6 +33,7 @@
 
 extern AstNode* root_node;
 
+#ifdef USE_AST_TRACE
 static inline const char* ast_node_type_to_str(AstNodeType type) {
 
     return (type == AST_TERMINAL)         ? "AST_TERMINAL" :
@@ -48,6 +49,7 @@ static inline const char* ast_node_type_to_str(AstNodeType type) {
             (type == AST_PROD_ELEM)       ? "AST_PROD_ELEM" :
                                             "UNKNOWN AST TYPE";
 }
+#endif
 
 static inline size_t get_struct_size(AstNodeType type) {
 
@@ -61,7 +63,8 @@ static inline size_t get_struct_size(AstNodeType type) {
             (type == AST_ZERO_OR_ONE)     ? sizeof(struct _ast_zero_or_one_) :
             (type == AST_ONE_OR_MORE)     ? sizeof(struct _ast_one_or_more_) :
             (type == AST_ZERO_OR_MORE)    ? sizeof(struct _ast_zero_or_more_) :
-            (type == AST_GROUP)           ? sizeof(struct _ast_group_) : 0;
+            (type == AST_GROUP)           ? sizeof(struct _ast_group_) :
+                                            0;
 }
 
 AstNode* create_ast_node(AstNodeType type) {

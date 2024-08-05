@@ -22,4 +22,4 @@ void* mem_realloc(void* ptr, size_t size);
 void* mem_dup(void* ptr, size_t size);
 void mem_free(void* ptr);
 
-#endif  /* _MEMORY_H_ */
+#endif /* _MEMORY_H_ */

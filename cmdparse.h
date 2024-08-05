@@ -13,9 +13,9 @@
 #define _CMDPARSE_H_
 
 #include "buffer.h"
+#include "ptr_lst.h"
 #include "str.h"
 #include "str_lst.h"
-#include "ptr_lst.h"
 
 typedef void (*cmdline_callback)(void);
 
@@ -43,4 +43,4 @@ typedef struct {
 
 void internal_parse_cmdline(int argc, char** argv);
 
-#endif  /* _CMDPARSE_H_ */
+#endif /* _CMDPARSE_H_ */

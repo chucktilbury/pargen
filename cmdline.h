@@ -67,4 +67,4 @@ const char* iterate_cmdline(const char* name, int* post);
 void show_help(void);
 void show_version(void);
 
-#endif  /* _CMDLINE_H_ */
+#endif /* _CMDLINE_H_ */

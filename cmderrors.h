@@ -4,4 +4,4 @@
 void error(const char* fmt, ...);
 void warning(const char* fmt, ...);
 
-#endif  /* _CMDERRORS_H_ */
+#endif /* _CMDERRORS_H_ */

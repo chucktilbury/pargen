@@ -43,7 +43,7 @@ int main(void) {
     // dump_str_lst(terms, "\nTERMINALS");
     // dump_str_lst(nterms, "\nNON TERMINALS");
 
-    //traverse_ast(NULL, NULL);
+    // traverse_ast(NULL, NULL);
     regurg();
 
     return 0;

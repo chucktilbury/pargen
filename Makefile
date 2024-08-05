@@ -93,3 +93,6 @@ clean:
 remk: clean all
 
 remake: remk
+
+format: clean
+	clang-format -i --verbose *.c *.h

@@ -15,11 +15,11 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "cmdline.h"
 #include "cmderrors.h"
+#include "cmdline.h"
+#include "cmdparse.h"
 #include "memory.h"
 #include "myassert.h"
-#include "cmdparse.h"
 
 #define EOI 1
 #define EOS 0

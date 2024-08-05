@@ -46,4 +46,4 @@ int comp_string_str(String* ptr, const char* str);
 int comp_string_string(String* ptr, String* str);
 int comp_string_fmt(String* ptr, const char* fmt, ...);
 
-#endif  /* _STR_H_ */
+#endif /* _STR_H_ */

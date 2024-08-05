@@ -25,4 +25,4 @@ void* peek_ptr_lst(PtrLst* lst);
 void clear_ptr_list(PtrLst* lst);
 void* iterate_ptr_lst(PtrLst* lst, int* post);
 
-#endif  /* _PTR_LST_H_ */
+#endif /* _PTR_LST_H_ */
