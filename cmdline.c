@@ -283,7 +283,7 @@ const char* get_cmdline(const char* name) {
     _cmd_opt_t_* opt = search_name(name);
     ASSERT_MSG(opt != NULL, "cannot find the option searched for: %s", name);
 
-    if((opt->flag & CMD_RARG) || (opt->flag & CMD_OARG)) {
+    if((opt->flag & CMD_REQD) || (opt->flag & CMD_RARG) || (opt->flag & CMD_OARG)) {
         int post = 0;
         return iterate_cmdline(name, &post);
     }

@@ -60,12 +60,15 @@ Terminal symbols can be defined as quoted strings or as a symbol that starts wit
 
 grammar
     : ( rule )+
+    ;
 
 rule
     : ':' production ( '|' production )* ';'
+    ;
 
 production
     : ( prod_elem )+
+    ;
 
 prod_elem
     : TERMINAL
@@ -74,18 +77,23 @@ prod_elem
     | one_or_more
     | one_or_zero
     | group
+    ;
 
 zero_or_more
     : group '*'
+    ;
 
 one_or_more
     : group '+'
+    ;
 
 one_or_zero
     : group '?'
+    ;
 
 group
     : '(' production ')'
+    ;
 
 ```
 

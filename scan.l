@@ -222,7 +222,7 @@ void open_file(const char *fname) {
 
     yyin = fopen(fname, "r");
     if(yyin == NULL) {
-        fprintf(stderr, "fatal error: cannot open input file: %s: %s\n", fname,
+        fprintf(stderr, "fatal error: cannot open input file: '%s': %s\n", fname,
                 strerror(errno));
         exit(1);
     }
