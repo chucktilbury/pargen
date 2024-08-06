@@ -6,6 +6,9 @@ parse.h
 parse.output
 scan.c
 pargen
+bin/
+lib/
+build/
 
 # Object files
 *.o

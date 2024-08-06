@@ -1,0 +1,34 @@
+cmake_minimum_required(VERSION 3.10)
+
+include_directories(
+    "${PROJECT_SOURCE_DIR}/../src"
+)
+
+link_directories(
+    /usr/local/lib
+)
+
+add_definitions(
+    -Wall
+    -Wextra
+    -Wpedantic
+    -Wno-gnu-zero-variadic-macro-arguments
+    -Wno-format-security
+)
+
+if(CMAKE_BUILD_TYPE STREQUAL "debug")
+    add_definitions(
+        -g
+        -DMEMORY_DEBUG
+        -DUSE_TRACE
+    )
+elseif(CMAKE_BUILD_TYPE STREQUAL "release")
+    add_definitions(
+        -Ofast
+    )
+elseif(CMAKE_BUILD_TYPE STREQUAL "profile")
+    add_definitions(
+        -O0
+        -pg
+    )
+endif()

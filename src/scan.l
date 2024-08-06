@@ -29,7 +29,7 @@ String* convert_token(const char* str) {
     if(isalnum(str[1]))
         append_string_char(ptr, '_');
 
-    for(int i = 1; i < strlen(&str[1]); i++) {
+    for(unsigned i = 1; i < strlen(&str[1]); i++) {
         switch(str[i]) {
             case '+':
                 append_string_str(ptr, "_PLUS");
