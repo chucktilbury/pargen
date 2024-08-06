@@ -14,4 +14,4 @@
 
 void regurg(void);
 
-#endif  /* _REGURG_H_ */
+#endif /* _REGURG_H_ */

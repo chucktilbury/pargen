@@ -4,11 +4,11 @@
 #include <stdio.h>
 
 #include "ast.h"
+#include "cmdline.h"
 #include "hash.h"
 #include "scan.h"
 #include "str.h"
 #include "str_lst.h"
-#include "cmdline.h"
 
 extern int yydebug;
 
@@ -18,10 +18,12 @@ StrLst* nterms = NULL;
 void init(int argc, char** argv) {
 
     init_cmdline("Simple Parser Generator", "", "Parser Generator", "0.0.0");
-    add_cmdline('v', "verbosity", "verbo", "control how much text is displayed during execution", "0", NULL, CMD_NUM|CMD_RARG);
+    add_cmdline('v', "verbosity", "verbo", "control how much text is displayed during execution",
+                "0", NULL, CMD_NUM | CMD_RARG);
     add_cmdline('V', "version", NULL, "show the version", NULL, show_version, CMD_NARG);
     add_cmdline('h', "help", NULL, "show this help text", NULL, show_help, CMD_NARG);
-    add_cmdline(0, NULL, "list of files", "list of files to be processed", NULL, NULL, CMD_STR | CMD_REQD);
+    add_cmdline(0, NULL, "list of files", "list of files to be processed", NULL,
+                NULL, CMD_STR | CMD_REQD);
     parse_cmdline(argc, argv, 0);
 }
 
