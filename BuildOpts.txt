@@ -11,9 +11,7 @@ link_directories(
 add_definitions(
     -Wall
     -Wextra
-    -Wpedantic
-    -Wno-gnu-zero-variadic-macro-arguments
-    -Wno-format-security
+    -std=c99
 )
 
 if(CMAKE_BUILD_TYPE STREQUAL "debug")

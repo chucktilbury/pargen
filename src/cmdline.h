@@ -13,12 +13,11 @@
 #define _CMDLINE_H_
 
 #include <stdbool.h>
-
-#include "cmderrors.h"
-#include "cmdparse.h"
 #include "str.h"
 
 typedef void (*cmdline_callback)(void);
+#include "cmderrors.h"
+#include "cmdparse.h"
 
 /**
  * Note that this structure of types and conditions allows for a fairly complex
@@ -67,4 +66,4 @@ const char* iterate_cmdline(const char* name, int* post);
 void show_help(void);
 void show_version(void);
 
-#endif /* _CMDLINE_H_ */
+#endif  /* _CMDLINE_H_ */
