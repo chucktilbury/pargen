@@ -237,7 +237,7 @@ void open_file(const char *fname) {
     fstack = fs;
 }
 
-int get_line_no() {
+int get_line_no(void) {
 
     if(fstack != NULL)
         return fstack->line;
@@ -245,7 +245,7 @@ int get_line_no() {
         return -1;
 }
 
-int get_col_no() {
+int get_col_no(void) {
 
     if(fstack != NULL)
         return fstack->col;
@@ -253,7 +253,7 @@ int get_col_no() {
         return -1;
 }
 
-const char* get_file_name() {
+const char* get_file_name(void) {
 
     if(fstack != NULL)
         return fstack->fname;

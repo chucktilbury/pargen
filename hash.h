@@ -31,7 +31,7 @@ typedef enum {
 
 // TODO: use the list functions for the table. That means that the list needs to
 // be able to handle NULL pointers.
-HashTable* create_hashtable();
+HashTable* create_hashtable(void);
 void destroy_hashtable(HashTable* table);
 HashResult insert_hashtable(HashTable* table, const char* key, void* data, size_t size);
 HashResult find_hashtable(HashTable* tab, const char* key, void* data, size_t size);

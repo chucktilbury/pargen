@@ -21,9 +21,8 @@ void init(int argc, char** argv) {
     add_cmdline('v', "verbosity", "verbo", "control how much text is displayed during execution", "0", NULL, CMD_NUM|CMD_RARG);
     add_cmdline('V', "version", NULL, "show the version", NULL, show_version, CMD_NARG);
     add_cmdline('h', "help", NULL, "show this help text", NULL, show_help, CMD_NARG);
-    add_cmdline(0, NULL, "list of files", "list of files to be processed", NULL,
-                NULL, CMD_STR | CMD_REQD);
-    parse_cmdline(argc, argv, 1);
+    add_cmdline(0, NULL, "list of files", "list of files to be processed", NULL, NULL, CMD_STR | CMD_REQD);
+    parse_cmdline(argc, argv, 0);
 }
 
 void dump_str_lst(StrLst* lst, const char* str) {

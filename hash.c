@@ -107,7 +107,7 @@ static void rehash_table(HashTable* tab) {
     }
 }
 
-HashTable* create_hashtable() {
+HashTable* create_hashtable(void) {
 
     HashTable* tab = _ALLOC_DS(HashTable);
 
