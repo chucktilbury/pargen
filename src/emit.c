@@ -10,3 +10,12 @@
  * @copyright Copyright (c) 2024
  * 
  */
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "emit_ast.h"
+#include "emit_parser.h"
+
+void emit(void) {
+
+}

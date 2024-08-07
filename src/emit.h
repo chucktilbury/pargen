@@ -14,5 +14,6 @@
 #ifndef _EMIT_H_
 #define _EMIT_H_
 
+void emit(void);
 
 #endif  /* _EMIT_H_ */
