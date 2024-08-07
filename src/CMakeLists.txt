@@ -34,7 +34,9 @@ add_executable(${PROJECT_NAME}
     cmdline.c
     cmderrors.c
     cmdparse.c
-    database.c
+    emit.c
+    emit_parser.c
+    emit_ast.c
     main.c
 )
 
