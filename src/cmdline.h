@@ -12,8 +12,8 @@
 #ifndef _CMDLINE_H_
 #define _CMDLINE_H_
 
-#include <stdbool.h>
 #include "str.h"
+#include <stdbool.h>
 
 typedef void (*cmdline_callback)(void);
 #include "cmderrors.h"

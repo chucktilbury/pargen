@@ -17,7 +17,7 @@
 #include "str.h"
 #include "str_lst.h"
 
-//typedef void (*cmdline_callback)(void);
+// typedef void (*cmdline_callback)(void);
 
 typedef struct {
     int short_opt;

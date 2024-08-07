@@ -54,18 +54,18 @@ static inline const char* ast_node_type_to_str(AstNodeType type) {
 
 static inline size_t get_struct_size(AstNodeType type) {
 
-    return (type == AST_TERMINAL) ? sizeof(struct _ast_terminal_) :
+    return (type == AST_TERMINAL)         ? sizeof(struct _ast_terminal_) :
             (type == AST_NTERM_REFERENCE) ? sizeof(struct _ast_nterm_reference_) :
-            (type == AST_GRAMMAR) ? sizeof(struct _ast_grammar_) :
-            (type == AST_RULE)    ? sizeof(struct _ast_rule_) :
+            (type == AST_GRAMMAR)         ? sizeof(struct _ast_grammar_) :
+            (type == AST_RULE)            ? sizeof(struct _ast_rule_) :
             (type == AST_PRODUCTION_LIST) ? sizeof(struct _ast_production_list_) :
-            (type == AST_PRODUCTION)   ? sizeof(struct _ast_production_) :
-            (type == AST_PROD_ELEM)    ? sizeof(struct _ast_prod_elem_) :
-            (type == AST_ZERO_OR_ONE)  ? sizeof(struct _ast_zero_or_one_) :
-            (type == AST_ONE_OR_MORE)  ? sizeof(struct _ast_one_or_more_) :
-            (type == AST_ZERO_OR_MORE) ? sizeof(struct _ast_zero_or_more_) :
-            (type == AST_GROUP)        ? sizeof(struct _ast_group_) :
-                                         0;
+            (type == AST_PRODUCTION)      ? sizeof(struct _ast_production_) :
+            (type == AST_PROD_ELEM)       ? sizeof(struct _ast_prod_elem_) :
+            (type == AST_ZERO_OR_ONE)     ? sizeof(struct _ast_zero_or_one_) :
+            (type == AST_ONE_OR_MORE)     ? sizeof(struct _ast_one_or_more_) :
+            (type == AST_ZERO_OR_MORE)    ? sizeof(struct _ast_zero_or_more_) :
+            (type == AST_GROUP)           ? sizeof(struct _ast_group_) :
+                                            0;
 }
 
 AstNode* create_ast_node(AstNodeType type) {
