@@ -104,7 +104,20 @@ In the language, the ``*`` means "zero or more", ``+`` means "one or more", and 
 To build the parser generator simply type ``make``. 
 #### Dependencies
 
-* GNU make
-* clang
+* Cmake
+* Doxygen with Graphiz
+* Clang (see ./setup)
+* Clang-format
 * Bison
 * Flex
+
+* Run the ``setup`` script in the root directory to set some environment vars and the path. 
+* The ``cleanup`` script deletes the ./build, ./bin and ./lib directories
+
+Build targets
+* all
+* clean
+* docs
+* format
+
+
