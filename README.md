@@ -101,7 +101,10 @@ In the language, the ``*`` means "zero or more", ``+`` means "one or more", and 
 
 ### Build
 
-To build the parser generator simply type ``make``. 
+To build the parser generator simply type ``./setup`` then ``make``. 
+
+For more information, take a look at ``.project_env`` and ``setup``.
+
 #### Dependencies
 
 * Git
@@ -111,6 +114,8 @@ To build the parser generator simply type ``make``.
 * Clang-format
 * Bison
 * Flex
+
+#### Other info
 
 * Run the ``setup`` script in the root directory to set some environment vars and the path. 
 * The ``cleanup`` script deletes the ./build, ./bin and ./lib directories
