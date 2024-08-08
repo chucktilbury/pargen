@@ -104,6 +104,7 @@ In the language, the ``*`` means "zero or more", ``+`` means "one or more", and 
 To build the parser generator simply type ``make``. 
 #### Dependencies
 
+* Git
 * Cmake
 * Doxygen with Graphiz
 * Clang (see ./setup)
