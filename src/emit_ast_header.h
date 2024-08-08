@@ -9,10 +9,9 @@
  * @copyright Copyright (c) 2024
  *
  */
-#ifndef _EMIT_AST_H_
-#define _EMIT_AST_H_
+#ifndef _EMIT_AST_HEADER_H_
+#define _EMIT_AST_HEADER_H_
 
 void emit_ast_header(void);
-void emit_ast_source(void);
 
-#endif /* _EMIT_AST_H_ */
+#endif  /* _EMIT_AST_HEADER_H_ */

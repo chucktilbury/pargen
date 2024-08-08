@@ -9,10 +9,12 @@
         "nterms",
         "OARG",
         "outtro",
+        "postamble",
         "RARG",
         "regurg",
         "sidx",
         "sopts",
+        "tstr",
         "willnilly",
         "yyparse"
     ]

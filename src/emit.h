@@ -14,6 +14,9 @@
 #ifndef _EMIT_H_
 #define _EMIT_H_
 
-void emit(void);
+#include <stdio.h>
 
-#endif /* _EMIT_H_ */
+void emit(void);
+void emit_block(FILE* fh, const char* const* block);
+
+#endif  /* _EMIT_H_ */

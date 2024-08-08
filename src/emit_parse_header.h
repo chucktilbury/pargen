@@ -9,11 +9,10 @@
  * @copyright Copyright (c) 2024
  *
  */
-#ifndef _EMIT_PARSER_H_
-#define _EMIT_PARSER_H_
+#ifndef _EMIT_PARSE_HEADER_H_
+#define _EMIT_PARSE_HEADER_H_
 
 void emit_parse_header(void);
-void emit_parse_source(void);
 
 
-#endif /* _EMIT_PARSER_H_ */
+#endif  /* _EMIT_PARSE_HEADER_H_ */

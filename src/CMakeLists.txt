@@ -35,8 +35,10 @@ add_executable(${PROJECT_NAME}
     cmderrors.c
     cmdparse.c
     emit.c
-    emit_parser.c
-    emit_ast.c
+    emit_parse_header.c
+    emit_parse_source.c
+    emit_ast_header.c
+    emit_ast_source.c
     main.c
 )
 

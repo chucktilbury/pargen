@@ -13,8 +13,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "emit_ast.h"
-#include "emit_parser.h"
+#include "emit_ast_header.h"
+#include "emit_ast_source.h"
+#include "emit_parse_header.h"
+#include "emit_parse_source.h"
 
 void emit(void) {
+
+    emit_ast_header();
+    emit_ast_source();
+    emit_parse_header();
+    emit_parse_source();
+}
+
+void emit_block(FILE* fh, const char* const* block) {
+
+    for(int i = 0; block[i] != NULL; i++) {
+        fprintf(fh, "%s\n", block[i]);
+    } 
 }
