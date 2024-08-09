@@ -232,6 +232,8 @@ void ast_group(ast_group_t* node, AstPassFunc pre, AstPassFunc post) {
 
 void traverse_ast(AstPassFunc pre, AstPassFunc post) {
 
+    state_count = 0;
+
     if(root_node != NULL) {
         ast_grammar((ast_grammar_t*)root_node, pre, post);
     }
