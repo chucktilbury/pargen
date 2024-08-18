@@ -31,6 +31,18 @@ String* convert_token(const char* str) {
 
     for(unsigned i = 1; i < strlen(&str[1]); i++) {
         switch(str[i]) {
+            case '!':
+                append_string_str(ptr, "_BANG");
+                break;
+            case '@':
+                append_string_str(ptr, "_AT");
+                break;
+            case '^':
+                append_string_str(ptr, "_CARAT");
+                break;
+            case '&':
+                append_string_str(ptr, "_AMPER");
+                break;
             case '+':
                 append_string_str(ptr, "_PLUS");
                 break;
@@ -54,6 +66,12 @@ String* convert_token(const char* str) {
                 break;
             case ')':
                 append_string_str(ptr, "_CPAREN");
+                break;
+            case '<':
+                append_string_str(ptr, "_OPBRACE");
+                break;
+            case '>':
+                append_string_str(ptr, "_CPBRACE");
                 break;
             case ':':
                 append_string_str(ptr, "_COLON");
@@ -90,6 +108,9 @@ String* convert_token(const char* str) {
                 break;
             case '\"':
                 append_string_str(ptr, "_DQUOTE");
+                break;
+            case '$':
+                append_string_str(ptr, "_DOLLAR");
                 break;
             default:
                 append_string_char(ptr, toupper(str[i]));
@@ -138,10 +159,11 @@ String* convert_token(const char* str) {
 ";"         { return ';'; }
 ","         { return ','; }
 "="         { return '='; }
+"$"         { return '$'; }
 
 [a-z_][a-zA-Z_0-9]* {
         yylval.str = create_string(yytext);
-        return NON_TERMINAL;
+        return IDENT;
     }
 
 [A-Z][a-zA-Z_0-9]* {

@@ -28,7 +28,7 @@ static int dummy(void) {
 static int parse_header_pre(AstNode* node) {
 
     return (node->type == AST_TERMINAL)         ? dummy() :
-            (node->type == AST_NTERM_REFERENCE) ? dummy() :
+            (node->type == AST_NON_TERMINAL) ? dummy() :
             (node->type == AST_ZERO_OR_ONE)     ? dummy() :
             (node->type == AST_ONE_OR_MORE)     ? dummy() :
             (node->type == AST_ZERO_OR_MORE)    ? dummy() :
@@ -44,7 +44,7 @@ static int parse_header_pre(AstNode* node) {
 static int parse_header_post(AstNode* node) {
 
     return (node->type == AST_TERMINAL)         ? dummy() :
-            (node->type == AST_NTERM_REFERENCE) ? dummy() :
+            (node->type == AST_NON_TERMINAL) ? dummy() :
             (node->type == AST_ZERO_OR_ONE)     ? dummy() :
             (node->type == AST_ONE_OR_MORE)     ? dummy() :
             (node->type == AST_ZERO_OR_MORE)    ? dummy() :

@@ -38,7 +38,7 @@ AstNode* root_node = NULL;
 };
 
 %token<str> TERMINAL
-%token<str> NON_TERMINAL
+%token<str> IDENT
 
 %type <node> grammar
 %type <node> rule
@@ -49,6 +49,8 @@ AstNode* root_node = NULL;
 %type <node> one_or_more
 %type <node> one_or_zero
 %type <node> group
+%type <node> terminal
+%type <node> non_terminal
 
 %define parse.error verbose
 %locations
@@ -70,7 +72,7 @@ grammar
     ;
 
 rule
-    : NON_TERMINAL ':' production_list ';' {
+    : IDENT ':' production_list ';' {
             PARSE_TRACE("create rule: %s", raw_string($1));
             append_str_lst(nterms, $1);
             $$ = create_ast_node(AST_RULE);
@@ -106,45 +108,40 @@ production
     ;
 
 prod_elem
-    : TERMINAL {
+    : terminal {
             // glean the definitions of terminal symbols.
-            PARSE_TRACE("TERMINAL: %s", raw_string($1));
-            const char* str = raw_string($1);
+            const char* str = raw_string(((ast_terminal_t*)$1)->tok);
+            PARSE_TRACE("prod_elem:terminal: %s", str);
             $$ = create_ast_node(AST_PROD_ELEM);
-            ast_terminal_t* node = (ast_terminal_t*)create_ast_node(AST_TERMINAL);
-            node->tok = $1;
-            ((ast_prod_elem_t*)$$)->node = (AstNode*)node;
+            ((ast_prod_elem_t*)$$)->node = $1;
 
             if(search_str_lst(terms, str) == -1)
                 append_str_lst(terms, create_string(str));
 
         }
-    | NON_TERMINAL {
+    | non_terminal {
             // this is a reference to the non-terminal.
-            PARSE_TRACE("NON_TERMINAL: %s", raw_string($1));
+            PARSE_TRACE("prod_elem:non_terminal: %s", raw_string(((ast_non_terminal_t*)$1)->tok));
             $$ = create_ast_node(AST_PROD_ELEM);
-            ast_nterm_reference_t* node =
-                (ast_nterm_reference_t*)create_ast_node(AST_NTERM_REFERENCE);
-            node->tok = $1;
-            ((ast_prod_elem_t*)$$)->node = (AstNode*)node;
+            ((ast_prod_elem_t*)$$)->node = $1;
         }
     | zero_or_more {
-            PARSE_TRACE("prod_elem->zero_or_more");
+            PARSE_TRACE("prod_elem:zero_or_more");
             $$ = create_ast_node(AST_PROD_ELEM);
             ((ast_prod_elem_t*)$$)->node = $1;
         }
     | one_or_more {
-            PARSE_TRACE("prod_elem->one_or_more");
+            PARSE_TRACE("prod_elem:one_or_more");
             $$ = create_ast_node(AST_PROD_ELEM);
             ((ast_prod_elem_t*)$$)->node = $1;
         }
     | one_or_zero {
-            PARSE_TRACE("prod_elem->one_or_zero");
+            PARSE_TRACE("prod_elem:one_or_zero");
             $$ = create_ast_node(AST_PROD_ELEM);
             ((ast_prod_elem_t*)$$)->node = $1;
         }
     | group {
-            PARSE_TRACE("prod_elem->group");
+            PARSE_TRACE("prod_elem:group");
             $$ = create_ast_node(AST_PROD_ELEM);
             ((ast_prod_elem_t*)$$)->node = $1;
         }
@@ -152,7 +149,7 @@ prod_elem
 
 zero_or_more
     : group '*' {
-            PARSE_TRACE("zero_or_more->group");
+            PARSE_TRACE("zero_or_more:group");
             $$ = create_ast_node(AST_ZERO_OR_MORE);
             ((ast_zero_or_more_t*)$$)->group = (ast_group_t*)$1;
         }
@@ -160,7 +157,7 @@ zero_or_more
 
 one_or_more
     : group '+' {
-            PARSE_TRACE("one_or_more->group");
+            PARSE_TRACE("one_or_more:group");
             $$ = create_ast_node(AST_ONE_OR_MORE);
             ((ast_one_or_more_t*)$$)->group = (ast_group_t*)$1;
         }
@@ -168,7 +165,7 @@ one_or_more
 
 one_or_zero
     : group '?' {
-            PARSE_TRACE("one_or_zero->group");
+            PARSE_TRACE("one_or_zero:group");
             $$ = create_ast_node(AST_ZERO_OR_ONE);
             ((ast_zero_or_one_t*)$$)->group = (ast_group_t*)$1;
         }
@@ -179,6 +176,36 @@ group
             PARSE_TRACE("group");
             $$ = create_ast_node(AST_GROUP);
             ((ast_group_t*)$$)->prod = (ast_production_t*)$2;
+        }
+    ;
+
+terminal
+    : TERMINAL {
+            PARSE_TRACE("terminal: %s with NULL", raw_string($1));
+            $$ = create_ast_node(AST_TERMINAL);
+            ((ast_terminal_t*)$$)->tok = $1;
+            ((ast_terminal_t*)$$)->name = NULL;
+        }
+    | TERMINAL '$' IDENT {
+            PARSE_TRACE("terminal: %s with %s", raw_string($1), raw_string($3));
+            $$ = create_ast_node(AST_TERMINAL);
+            ((ast_terminal_t*)$$)->tok = $1;
+            ((ast_terminal_t*)$$)->name = $3;
+        }
+    ;
+
+non_terminal
+    : IDENT {
+            PARSE_TRACE("non_terminal: %s with NULL", raw_string($1));
+            $$ = create_ast_node(AST_NON_TERMINAL);
+            ((ast_terminal_t*)$$)->tok = $1;
+            ((ast_terminal_t*)$$)->name = NULL;
+        }
+    | IDENT '$' IDENT {
+            PARSE_TRACE("non_terminal: %s with %s", raw_string($1), raw_string($3));
+            $$ = create_ast_node(AST_NON_TERMINAL);
+            ((ast_terminal_t*)$$)->tok = $1;
+            ((ast_terminal_t*)$$)->name = $3;
         }
     ;
 

@@ -38,7 +38,7 @@ int state_count = 0;
 static inline const char* ast_node_type_to_str(AstNodeType type) {
 
     return (type == AST_TERMINAL)         ? "AST_TERMINAL" :
-            (type == AST_NTERM_REFERENCE) ? "AST_NTERM_REFERENCE" :
+            (type == AST_NON_TERMINAL) ? "AST_NON_TERMINAL" :
             (type == AST_ZERO_OR_ONE)     ? "AST_ZERO_OR_ONE" :
             (type == AST_ONE_OR_MORE)     ? "AST_ONE_OR_MORE" :
             (type == AST_ZERO_OR_MORE)    ? "AST_ZERO_OR_MORE" :
@@ -55,7 +55,7 @@ static inline const char* ast_node_type_to_str(AstNodeType type) {
 static inline size_t get_struct_size(AstNodeType type) {
 
     return (type == AST_TERMINAL)         ? sizeof(struct _ast_terminal_) :
-            (type == AST_NTERM_REFERENCE) ? sizeof(struct _ast_nterm_reference_) :
+            (type == AST_NON_TERMINAL) ? sizeof(struct _ast_non_terminal_) :
             (type == AST_GRAMMAR)         ? sizeof(struct _ast_grammar_) :
             (type == AST_RULE)            ? sizeof(struct _ast_rule_) :
             (type == AST_PRODUCTION_LIST) ? sizeof(struct _ast_production_list_) :
@@ -81,18 +81,18 @@ void ast_terminal(ast_terminal_t* node, AstPassFunc pre, AstPassFunc post) {
     CALL_PRE(node);
 
     AST_TRACE("%s", ast_node_type_to_str(node->type.type));
-    AST_TRACE("> %s", raw_string(node->tok));
+    AST_TRACE("> %s as %s", raw_string(node->tok), node->name? node->name: "NULL");
     state_count++;
 
     CALL_POST(node);
 }
 
-void ast_nterm_reference(ast_nterm_reference_t* node, AstPassFunc pre, AstPassFunc post) {
+void ast_non_terminal(ast_non_terminal_t* node, AstPassFunc pre, AstPassFunc post) {
 
     CALL_PRE(node);
 
     AST_TRACE("%s", ast_node_type_to_str(node->type.type));
-    AST_TRACE("> %s", raw_string(node->tok));
+    AST_TRACE("> %s as %s", raw_string(node->tok), node->name? node->name: "NULL");
     state_count++;
 
     CALL_POST(node);
@@ -161,8 +161,8 @@ void ast_prod_elem(ast_prod_elem_t* node, AstPassFunc pre, AstPassFunc post) {
         case AST_TERMINAL:
             ast_terminal((ast_terminal_t*)node->node, pre, post);
             break;
-        case AST_NTERM_REFERENCE:
-            ast_nterm_reference((ast_nterm_reference_t*)node->node, pre, post);
+        case AST_NON_TERMINAL:
+            ast_non_terminal((ast_non_terminal_t*)node->node, pre, post);
             break;
         case AST_ZERO_OR_MORE:
             ast_zero_or_more((ast_zero_or_more_t*)node->node, pre, post);

@@ -126,7 +126,7 @@ static int post_group() {
 static int regurg_pre(AstNode* node) {
 
     return (node->type == AST_TERMINAL)         ? pre_terminal(node) :
-            (node->type == AST_NTERM_REFERENCE) ? pre_reference(node) :
+            (node->type == AST_NON_TERMINAL) ? pre_reference(node) :
             (node->type == AST_ZERO_OR_ONE)     ? pre_zero_or_one() :
             (node->type == AST_ONE_OR_MORE)     ? pre_one_or_more() :
             (node->type == AST_ZERO_OR_MORE)    ? pre_zero_or_more() :
@@ -142,7 +142,7 @@ static int regurg_pre(AstNode* node) {
 static int regurg_post(AstNode* node) {
 
     return (node->type == AST_TERMINAL)         ? dummy() :
-            (node->type == AST_NTERM_REFERENCE) ? dummy() :
+            (node->type == AST_NON_TERMINAL) ? dummy() :
             (node->type == AST_ZERO_OR_ONE)     ? post_zero_or_one() :
             (node->type == AST_ONE_OR_MORE)     ? post_one_or_more() :
             (node->type == AST_ZERO_OR_MORE)    ? post_zero_or_more() :

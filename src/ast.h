@@ -10,7 +10,7 @@
 typedef enum {
     // defined by the grammar grammar
     AST_TERMINAL = 100,
-    AST_NTERM_REFERENCE,
+    AST_NON_TERMINAL,
     AST_ZERO_OR_ONE,
     AST_ONE_OR_MORE,
     AST_ZERO_OR_MORE,
@@ -31,12 +31,14 @@ typedef struct _ast_node_ {
 typedef struct _ast_terminal_ {
     AstNode type;
     String* tok;
+    String* name;
 } ast_terminal_t;
 
-typedef struct _ast_nterm_reference_ {
+typedef struct _ast_non_terminal_ {
     AstNode type;
     String* tok;
-} ast_nterm_reference_t;
+    String* name;
+} ast_non_terminal_t;
 
 typedef struct _ast_zero_or_one_ {
     AstNode type;
@@ -97,7 +99,7 @@ void traverse_ast(AstPassFunc pre, AstPassFunc post);
 AstNode* create_ast_node(AstNodeType type);
 
 void ast_terminal(ast_terminal_t* node, AstPassFunc pre, AstPassFunc post);
-void ast_nterm_reference(ast_nterm_reference_t* node, AstPassFunc pre, AstPassFunc post);
+void ast_non_terminal(ast_non_terminal_t* node, AstPassFunc pre, AstPassFunc post);
 void ast_grammar(ast_grammar_t* node, AstPassFunc pre, AstPassFunc post);
 void ast_rule(ast_rule_t* node, AstPassFunc pre, AstPassFunc post);
 void ast_production_list(ast_production_list_t* node, AstPassFunc pre, AstPassFunc post);

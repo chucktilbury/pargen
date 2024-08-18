@@ -1,38 +1,26 @@
-# This is a raw grammar for the parser generator grammar grammar.
+# This is a simplified grammar for the parser generator 
+# input file grammar.
 
+# A grammar is one or more rules
 grammar
     : ( rule )+
     ;
 
+# A rule is at least one production followed by a list of alternative
+# productions. The ':' is read as 'rule is' and the '|' is read as 'or'.
+# The ';' is read as 'end'.
 rule
     : ':' production ( '|' production )* ';'
     ;
 
+# A production is one or more production elements.
 production
     : ( prod_elem )+
     ;
 
+# A production element is exactly one of the alternatives.
 prod_elem
     : TERMINAL
     | NON_TERMINAL
-    | zero_or_more
-    | one_or_more
-    | one_or_zero
-    | group
     ;
-
-zero_or_more
-    : group '*'
-    ;
-
-one_or_more
-    : group '+'
-    ;
-
-one_or_zero
-    : group '?'
-    ;
-
-group
-    : '(' production ')'
-    ;
+    
