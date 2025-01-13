@@ -13,7 +13,8 @@ int main(int argc, char** argv) {
     }
 
     init_scanner(argv[1]);
-    for(token_t* tok = get_token(); tok->type != END_OF_INPUT; tok = consume_token()) {
+    token_t* tok = consume_token();
+    for(; tok->type != END_OF_INPUT; tok = consume_token()) {
         printf("%s: %s: %s\n", tok_type_to_str(tok), tok->text, tok->name);
     }
     return 0;

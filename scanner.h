@@ -22,7 +22,10 @@ typedef struct {
     const char* text;
     const char* name;
     int line_no;
-    int col_no;
+    int state_no;
+    int match_state;
+    int no_match_state;
+    int error_state;
 } token_t;
 
 void init_scanner(const char* file_name);
