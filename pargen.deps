@@ -1,7 +1,0 @@
-scanner.o: scanner.c scanner.h
-main.o: main.c scanner.h
-errors.o: errors.c
-memory.o: memory.c errors.h
-scanner_support.o: scanner_support.c memory.h pointer_list.h scan.gen.h \
-  scanner.h
-pointer_list.o: pointer_list.c memory.h pointer_list.h
