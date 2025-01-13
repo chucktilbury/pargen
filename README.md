@@ -1,0 +1,2 @@
+# pargen
+Simple parser generator.
